@@ -1,0 +1,20 @@
+name: MCNSARanks
+main: com.hamaluik.MCNSARanks.MCNSARanks
+version: 1.0.0
+author: FuzzyWuzzie
+depend: [PermissionsEx]
+commands:
+   rank:
+      description: bob
+   ranks:
+      description: bob
+   who:
+      description: bob
+   list:
+      description: bob
+   playerlist:
+      description: bob
+   online:
+      description: bob
+   players:
+      description: bob
