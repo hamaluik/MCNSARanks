@@ -1,3 +1,27 @@
 /who - coloured, sorted list of players
 /ranks - coloured, sorted list of ranks
 /rank <player> - look up the rank of a player
+
+In order to use:
+Drop the .jar into your plugins folder. Then change the config in
+CommandBook:
+	online-on-join: false
+
+It expects the colour of each rank ('&a' for example) to be the prefix
+and the name of the rank to be the suffix (ex: for green templars:
+	prefix: '&a'
+	suffix: 'Templar'
+	
+Also, the 'rank' of each rank must be set, with the highest number being
+the lowest rank.
+
+Ex:
+Peon:
+	options:
+		rank: 1000
+Elder:
+	options:
+		rank: 500
+God:
+	options:
+		rank: 0
