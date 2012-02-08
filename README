@@ -25,3 +25,8 @@ Elder:
 God:
 	options:
 		rank: 0
+		
+TODO:
+	-Add promotions / demotions / peoning within this plugin
+	And keep auto-records of these (through an API in the notes plugin
+	perhaps?)
