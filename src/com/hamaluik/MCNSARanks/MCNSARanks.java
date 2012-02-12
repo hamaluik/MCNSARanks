@@ -43,6 +43,12 @@ public class MCNSARanks extends JavaPlugin {
 		registerCommand(new CommandRank(this));
 		registerCommand(new CommandRanks(this));
 		
+		// and set everyones colours
+		Player[] players = getServer().getOnlinePlayers();
+		for(int i = 0; i < players.length; i++) {
+			players[i].setPlayerListName(processColours(permissions.getUser(players[i]).getPrefix() + players[i].getName()));
+		}
+		
 		log.info("[MCNSARanks] plugin enabled");
 	}
 
