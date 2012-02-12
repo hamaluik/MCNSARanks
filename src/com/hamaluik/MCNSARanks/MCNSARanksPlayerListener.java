@@ -18,6 +18,9 @@ public class MCNSARanksPlayerListener extends PlayerListener {
 			ListOnline list = new ListOnline(plugin);
 			list.List(event.getPlayer());
 		}
+		
+		// set their rank colour for the display list
+		event.getPlayer().setPlayerListName(plugin.processColours(plugin.permissions.getUser(event.getPlayer()).getPrefix() + event.getPlayer().getName()));
 	}
 	
 	@Override
