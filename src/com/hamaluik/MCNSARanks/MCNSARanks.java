@@ -18,19 +18,23 @@ public class MCNSARanks extends JavaPlugin {
 	public PermissionManager permissions = null;
 	
 	// the commands..
-	public HashMap<String, Command> commands = new HashMap<String, Command>();
+	public HashMap<String, Command> commands = null;
 	
 	// listeners
 	public PlayerListener playerListener;
-	MCNSARanksCommandExecutor commandExecutor = new MCNSARanksCommandExecutor(this);
+	MCNSARanksCommandExecutor commandExecutor;
 	
 	// startup routine..
 	public void onEnable() {		
 		// set up the plugin..
 		this.setupPermissions();
 		
+		 commands = new HashMap<String, Command>();
+		
 		// setup listeners
 		playerListener = new PlayerListener(this);
+		
+		commandExecutor = new MCNSARanksCommandExecutor(this);
 		
 		// register commands
 		registerCommand(new CommandPlayers(this));
@@ -57,10 +61,13 @@ public class MCNSARanks extends JavaPlugin {
 	}
 	
 	// register a command
-	private void registerCommand(Command commandRanks) {
+	private void registerCommand(Command command) {
 		// add the command to the commands list and register it with Bukkit
-		this.commands.put(commandRanks.getCommand(), commandRanks);
-		this.getCommand(commandRanks.getCommand()).setExecutor(this.commandExecutor);
+		this.commands.put(command.getCommand(), command);
+		String commandString = command.getCommand();
+		if(this.getCommand(commandString) != null) {
+			this.getCommand(commandString).setExecutor(this.commandExecutor);
+		}
 	}
 
 	// load the permissions plugin

@@ -5,16 +5,23 @@ author: FuzzyWuzzie
 depend: [PermissionsEx]
 commands:
    rank:
+      usage: bob
       description: bob
    ranks:
+      usage: bob
       description: bob
    who:
+      usage: bob
       description: bob
    list:
+      usage: bob
       description: bob
    playerlist:
+      usage: bob
       description: bob
    online:
+      usage: bob
       description: bob
    players:
+      usage: bob
       description: bob
