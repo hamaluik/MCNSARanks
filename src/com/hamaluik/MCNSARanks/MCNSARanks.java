@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.hamaluik.MCNSARanks.commands.*;
@@ -23,7 +21,7 @@ public class MCNSARanks extends JavaPlugin {
 	public HashMap<String, Command> commands = new HashMap<String, Command>();
 	
 	// listeners
-	MCNSARanksPlayerListener playerListener = new MCNSARanksPlayerListener(this);
+	public PlayerListener playerListener;
 	MCNSARanksCommandExecutor commandExecutor = new MCNSARanksCommandExecutor(this);
 	
 	// startup routine..
@@ -31,12 +29,8 @@ public class MCNSARanks extends JavaPlugin {
 		// set up the plugin..
 		this.setupPermissions();
 		
-		// import the plugin manager
-		PluginManager pm = this.getServer().getPluginManager();
-		
 		// setup listeners
-		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Monitor, this);
-		pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Event.Priority.Lowest, this);
+		playerListener = new PlayerListener(this);
 		
 		// register commands
 		registerCommand(new CommandPlayers(this));
@@ -45,8 +39,13 @@ public class MCNSARanks extends JavaPlugin {
 		
 		// and set everyones colours
 		Player[] players = getServer().getOnlinePlayers();
-		for(int i = 0; i < players.length; i++) {
-			players[i].setPlayerListName(processColours(permissions.getUser(players[i]).getPrefix() + players[i].getName()));
+		for(int i = 0; i < players.length; i++) {			
+			// set their rank colour for the display list
+			String result = processColours(permissions.getUser(players[i]).getPrefix() + players[i].getName());
+			if(result.length() > 16) {
+				result = result.substring(0, 16);
+			}
+			players[i].setPlayerListName(result);
 		}
 		
 		log.info("[MCNSARanks] plugin enabled");
