@@ -17,17 +17,22 @@ public class PlayerListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void joinHandler(PlayerJoinEvent event) {
-		if(plugin.hasPermission(event.getPlayer(), "mcnsaranks.players")) {
-			ListOnline list = new ListOnline(plugin);
-			list.List(event.getPlayer());
+		try {
+			if(plugin.hasPermission(event.getPlayer(), "mcnsaranks.players")) {
+				ListOnline list = new ListOnline(plugin);
+				list.List(event.getPlayer());
+			}
+			
+			// set their rank colour for the display list
+			String result = plugin.processColours(plugin.permissions.getUser(event.getPlayer()).getPrefix() + event.getPlayer().getName());
+			if(result.length() > 16) {
+				result = result.substring(0, 16);
+			}
+			event.getPlayer().setPlayerListName(result);
 		}
-		
-		// set their rank colour for the display list
-		String result = plugin.processColours(plugin.permissions.getUser(event.getPlayer()).getPrefix() + event.getPlayer().getName());
-		if(result.length() > 16) {
-			result = result.substring(0, 16);
+		catch(Exception e) {
+			plugin.log.info("[MCNSARanks] Error: " + e.getMessage());
 		}
-		event.getPlayer().setPlayerListName(result);
 	}
 
 	
